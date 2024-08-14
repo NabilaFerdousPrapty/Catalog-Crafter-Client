@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CiLogin } from 'react-icons/ci';
-
+import logo from '../../assets/catalogLogo.png'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -9,15 +9,15 @@ const Navbar = () => {
       <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
         <div className="flex items-center justify-between">
           <a href="#">
-            <img className="w-auto h-6 sm:h-7" src="https://merakiui.com/images/full-logo.svg" alt="" />
+            <img className="w-auto h-14 " src={logo} alt="" />
           </a>
 
           {/* Mobile menu button */}
-          <div className="flex lg:hidden">
+          <div className="flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="text-gray-200 bg-slate-800 rounded dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
+              className="text-gray-600  rounded dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
               aria-label="toggle menu"
             >
               {isOpen ? (
@@ -58,7 +58,7 @@ const Navbar = () => {
           <div className="flex justify-center md:block">
             <a
               href="#"
-              className="px-4 py-2 mt-4 text-sm font-medium  bg-blue-500 rounded-md md:mt-0 md:ml-4 md:px-3 md:py-2 md:text-sm md:font-semibold md:bg-transparent md:border md:border-blue-500 md:hover:bg-blue-500 md:hover:text-white"
+              className="px-4 py-2 mt-4 text-sm font-medium  bg-blue-500 rounded-md md:mt-0 md:ml-4 md:px-3 md:py-2 md:text-sm md:font-semibold md:bg-transparent md:border md:border-blue-500 md:hover:bg-blue-500 md:hover:text-white text-black"
             >
               <CiLogin className="inline-block w-6 h-6" />
               <span className="ml-2">Login</span>
