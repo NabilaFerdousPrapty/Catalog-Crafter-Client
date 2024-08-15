@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CiLogin } from 'react-icons/ci';
 import logo from '../../assets/catalogLogo.png'
+import { Link } from 'react-router-dom';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -56,13 +57,13 @@ const Navbar = () => {
           </div>
 
           <div className="flex justify-center md:block">
-            <a
-              href="#"
+            <Link
+              to={'/login'}
               className="px-4 py-2 mt-4 text-sm font-medium  bg-blue-500 rounded-md md:mt-0 md:ml-4 md:px-3 md:py-2 md:text-sm md:font-semibold md:bg-transparent md:border md:border-blue-500 md:hover:bg-blue-500 md:hover:text-white text-black"
             >
               <CiLogin className="inline-block w-6 h-6" />
               <span className="ml-2">Login</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

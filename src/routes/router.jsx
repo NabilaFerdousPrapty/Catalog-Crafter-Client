@@ -23,7 +23,7 @@ import SignUp from "../Pages/SignUp/SignUp";
         path:'/login',
         element:<Login/>
     },{
-        path:'/register',
+        path:'/signup',
         element:<SignUp/>
     }
   ]);
