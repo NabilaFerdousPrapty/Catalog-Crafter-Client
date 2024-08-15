@@ -7,10 +7,13 @@ import Main from "../Layouts/Main";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import PrivateRoute from "./Private/PrivateRoute";
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Main />,
+      element: <PrivateRoute>
+        <Main/>
+      </PrivateRoute>,
       children:[
         {
             path: "/",

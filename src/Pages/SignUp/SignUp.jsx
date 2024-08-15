@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 const SignUp = () => {
@@ -101,10 +102,25 @@ const SignUp = () => {
             </svg>
           </button>
         </form>
+        <div className="text-white text-center my-3">
+        Already have an account?
+        </div>
+        <div className="flex  items-center justify-between mt-4 ">
+       
+      <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4 "></span>
+    
+      <Link to={'/login'} className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline">
+        or login in
+      </Link>
+
+      <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+    </div>
       </div>
     </div>
   </div>
+ 
 </section>
+
    
         </div>
     );

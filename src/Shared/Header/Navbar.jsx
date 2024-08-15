@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { CiLogin } from 'react-icons/ci';
 import logo from '../../assets/catalogLogo.png'
 import { Link } from 'react-router-dom';
