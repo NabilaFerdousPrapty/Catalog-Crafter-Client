@@ -20,9 +20,9 @@ const Login = () => {
 
     <p className="mt-3 text-xl text-center text-[#132f50] font-bold">Welcome back!</p>
 
-    <a
+    <button
       href="#"
-      className="flex items-center justify-center mt-4  transition-colors duration-300 transform border rounded-lg dark:border-gray-700  hover:bg-gray-50 dark:hover:bg-gray-600"
+      className="flex items-center justify-center mt-4  transition-colors duration-300 transform border rounded-lg dark:border-gray-700  hover:bg-gray-50 dark:hover:bg-gray-600 w-full "
     >
       <div className="px-4 py-2">
         <svg className="w-6 h-6" viewBox="0 0 40 40">
@@ -46,7 +46,7 @@ const Login = () => {
       </div>
 
       <span className="w-5/6 px-4 py-3 font-bold text-center">Sign in with Google</span>
-    </a>
+    </button>
 
     <div className="flex items-center justify-between mt-4">
       <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/4"></span>
