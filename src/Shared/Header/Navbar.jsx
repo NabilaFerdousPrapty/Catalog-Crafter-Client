@@ -2,9 +2,12 @@ import  { useState } from 'react';
 import { CiLogin } from 'react-icons/ci';
 import logo from '../../assets/catalogLogo.png'
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/UseAuth';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+ const {
+  user,setUser,LogOut,
+ }=useAuth();
   return (
     <nav className="relative ">
       <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
@@ -57,13 +60,32 @@ const Navbar = () => {
           </div>
 
           <div className="flex justify-center md:block">
-            <Link
+            {
+              user ? 
+              <details className="dropdown">
+              <summary className="btn m-1">
+              
+                <img  className='w-8 h-8 rounded-full' 
+                src={user.photoURL} alt="" />
+              
+              </summary>
+              <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                <li><a>
+                  <button onClick={LogOut} >Logout</button>
+
+                  </a></li>
+                <li><a> Profile</a></li>
+              </ul>
+            </details>
+              :
+              <Link
               to={'/login'}
               className="px-4 py-2 mt-4 text-sm font-medium  bg-blue-500 rounded-md md:mt-0 md:ml-4 md:px-3 md:py-2 md:text-sm md:font-semibold md:bg-transparent md:border md:border-blue-500 md:hover:bg-blue-500 md:hover:text-white text-black"
             >
               <CiLogin className="inline-block w-6 h-6" />
               <span className="ml-2">Login</span>
             </Link>
+            }
           </div>
         </div>
       </div>

@@ -1,22 +1,51 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/UseAuth";
+import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
 
 
 const SignUp = () => {
-    const { user, setUser,signInWithGoogle,loading, setLoading, } = useAuth();
+    const { user, setUser,signInWithGoogle,loading, setLoading, createUser,
+      signInWithEmail, } = useAuth();
+      const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+      } = useForm()
     const navigate=useNavigate();
+    const onSubmit = (data) => {
+
+    }
     const handleGoogleLogin = () => {
         signInWithGoogle()
         .then((result) => {
+
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Login Success',
+                text: `Welcome ${result.user.displayName}`,
+                showConfirmButton: false,
+                timer: 1500
+              })
             setUser(result.user);
-            setLoading(false);
-            // console.log(result.user);
             navigate('/');
+            setLoading(false);
         }
         ).catch((error) => {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Login Failed',
+            text: error.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
             console.log(error.message);
         });
     };
+
     return (
         <div>
          <section className="">
@@ -68,16 +97,18 @@ const SignUp = () => {
       <span className="w-5/6 px-4 py-3 font-bold text-center">Sign in with Google</span>
     </button>
 
-        <form className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2 ">
+        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2 ">
           <div className="md:col-span-2">
             <label className="block mb-2 text-sm  font-bold">
                Name
             </label>
             <input
+            {...register("name", { required: true })}
               type="text"
-              placeholder="John"
+              placeholder="John Doe"
               className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600   dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
             />
+             {errors.name && <span>This field is required</span>}
           </div>
 
          
@@ -87,10 +118,16 @@ const SignUp = () => {
               Photo url
             </label>
             <input
+            {
+              ...register("photo", { required: true })
+            }
               type="url"
               placeholder="https://www.example.com"
               className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600  dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
             />
+            {
+              errors.photo && <span>This field is required</span>
+            }
           </div>
 
           <div>
@@ -98,10 +135,16 @@ const SignUp = () => {
               Email address
             </label>
             <input
+            {
+              ...register("email", { required: true })
+            }
               type="email"
               placeholder="johnsnow@example.com"
               className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600  dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
             />
+            {
+              errors.email && <span>This field is required</span>
+            }
           </div>
 
           <div>
@@ -109,10 +152,16 @@ const SignUp = () => {
               Password
             </label>
             <input
+            {
+              ...register("password", { required: true })
+            }
               type="password"
               placeholder="Enter your password"
               className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400  border border-gray-200 rounded-lg dark:placeholder-gray-600  dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
             />
+            {
+              errors.password && <span>This field is required</span>
+            }
           </div>
 
           <div>
@@ -120,13 +169,19 @@ const SignUp = () => {
               Confirm password
             </label>
             <input
+            {
+              ...register("confirmPassword", { required: true })
+            }
               type="password"
               placeholder="Enter your password"
               className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400  border border-gray-200 rounded-lg dark:placeholder-gray-600  dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
             />
+            {
+              errors.confirmPassword && <span>This field is required</span>
+            }
           </div>
 
-          <button className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+          <button type="submit" className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
             <span>Sign Up</span>
 
             <svg
