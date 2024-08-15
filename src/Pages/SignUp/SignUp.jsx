@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 const SignUp = () => {
     const { user, setUser,signInWithGoogle,loading, setLoading, createUser,
-      signInWithEmail, } = useAuth();
+      signInWithEmail,updateUserProfile } = useAuth();
       const {
         register,
         handleSubmit,
@@ -15,6 +15,53 @@ const SignUp = () => {
       } = useForm()
     const navigate=useNavigate();
     const onSubmit = (data) => {
+      const {email,password,name,photo,confirmPassword}=data;
+      const regex=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+      if(password!==confirmPassword){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Password not matched',
+          text: 'Please enter the same password',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return;
+      }
+      if(!regex.test(password)){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Password must contain at least one uppercase letter, one lowercase letter and one number',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return;
+      }
+      createUser(email,password)
+      .then((result)=>{
+        updateUserProfile(name,photo)
+        .then(()=>{
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Account created successfully',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          navigate('/')
+        })
+      })
+      .catch((error)=>{
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Account creation failed',
+          text: error.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
 
     }
     const handleGoogleLogin = () => {

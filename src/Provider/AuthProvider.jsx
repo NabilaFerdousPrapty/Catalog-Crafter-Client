@@ -1,5 +1,5 @@
 import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from 'firebase/auth';
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { createContext } from 'react';
 import UseAxiosCommon from '../hooks/UseAxiosCommon';
 import auth from '../../Firebase/Firebase.config';

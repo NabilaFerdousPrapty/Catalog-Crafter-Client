@@ -6,7 +6,7 @@ import useAuth from '../../hooks/UseAuth';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
  const {
-  user,setUser,LogOut,
+  user,LogOut,
  }=useAuth();
   return (
     <nav className="relative ">
@@ -63,7 +63,7 @@ const Navbar = () => {
             {
               user ? 
               <details className="dropdown">
-              <summary className="btn m-1">
+              <summary className="btn mx-0 px-1 py-1 rounded">
               
                 <img  className='w-8 h-8 rounded-full' 
                 src={user.photoURL} alt="" />

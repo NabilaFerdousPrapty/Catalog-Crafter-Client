@@ -1,7 +1,75 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import logo from '../../assets/catalogLogo.png';
+import Swal from "sweetalert2";
+import useAuth from "../../hooks/UseAuth";
+import { useForm } from "react-hook-form";
 const Login = () => {
+  const { user, setUser,signInWithGoogle,loading, setLoading, createUser,
+    signInWithEmail,updateUserProfile } = useAuth();
+    const {
+      register,
+      handleSubmit,
+      watch,
+      formState: { errors },
+    } = useForm()
+  const navigate=useNavigate();
+  const onSubmit = (data) => {
+    const { email, password } = data;
+    signInWithEmail(email, password)
+      .then((result) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Login Success',
+          text: `Welcome ${result.user.displayName}`,
+          showConfirmButton: false,
+          timer: 1500
+        })
+        setUser(result.user);
+        navigate('/');
+        setLoading(false);
+      }
+      ).catch((error) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Login Failed',
+          text: error.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+        console.log(error.message);
+      });
+  }
+  const handleGoogleLogin = () => {
+    signInWithGoogle()
+    .then((result) => {
+
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Login Success',
+            text: `Welcome ${result.user.displayName}`,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        setUser(result.user);
+        navigate('/');
+        setLoading(false);
+    }
+    ).catch((error) => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Login Failed',
+        text: error.message,
+        showConfirmButton: false,
+        timer: 1500
+      })
+        console.log(error.message);
+    });
+};
     return (
         <div className="flex justify-center items-center h-screen text-[#07101b]">
        <div className="flex w-full max-w-sm mx-auto overflow-hidden  rounded-lg shadow-lg  lg:max-w-4xl">
@@ -21,7 +89,7 @@ const Login = () => {
     <p className="mt-3 text-xl text-center text-[#132f50] font-bold">Welcome back!</p>
 
     <button
-      href="#"
+      onClick={handleGoogleLogin}
       className="flex items-center justify-center mt-4  transition-colors duration-300 transform border rounded-lg dark:border-gray-700  hover:bg-gray-50 dark:hover:bg-gray-600 w-full "
     >
       <div className="px-4 py-2">
@@ -61,7 +129,8 @@ const Login = () => {
       <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
     </div>
 
-    <div className="mt-4">
+  <form onSubmit={handleSubmit(onSubmit)} action="">
+  <div className="mt-4">
       <label
         className="block mb-2 text-sm font-medium text-[#112A46]"
         htmlFor="LoggingEmailAddress"
@@ -69,10 +138,16 @@ const Login = () => {
         Email Address
       </label>
       <input
+       {
+        ...register("email", { required: true })
+      }
         id="LoggingEmailAddress"
         className="block w-full px-4 py-2  border rounded-lg  dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
         type="email"
       />
+      {
+        errors.email && <span className='text-red-500'>This field is required </span>
+      }
     </div>
 
     <div className="mt-4">
@@ -90,16 +165,23 @@ const Login = () => {
 
       <input
         id="loggingPassword"
+        {
+          ...register("password", { required: true })
+        }
         className="block w-full px-4 py-2   border rounded-lg dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
         type="password"
       />
+      {
+        errors.password && <span className='text-red-500'>This field is required</span>
+      }
     </div>
 
     <div className="mt-6">
-      <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-[#112A46] rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+      <button type="submit" className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-[#112A46] rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
         Sign In
       </button>
     </div>
+  </form>
 
     <div className="flex items-center justify-between mt-4">
       <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
