@@ -44,18 +44,18 @@ const Navbar = () => {
           }`}
         >
           <div className="flex flex-col md:flex-row md:mx-6">
-            <a
+            <Link
               className="my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0 border-b-2 border-transparent hover:border-blue-500 dark:hover:border-blue-400"
-              href="#"
+              to={'/'}
             >
               Home
-            </a>
-            <a
+            </Link>
+            <Link
               className="my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0 border-b-2 border-transparent hover:border-blue-500 dark:hover:border-blue-400"
-              href="#"
+              to={'/shop'}
             >
               Shop
-            </a>
+            </Link>
            
           </div>
 
@@ -65,7 +65,7 @@ const Navbar = () => {
               <details className="dropdown">
               <summary className="btn mx-0 px-1 py-1 rounded">
               
-                <img  className='w-8 h-8 rounded-full' 
+                <img  className='w-auto h-10 rounded-full' 
                 src={user.photoURL} alt="" />
               
               </summary>
