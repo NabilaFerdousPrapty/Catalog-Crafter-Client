@@ -1,4 +1,5 @@
 import useAuth from "../../hooks/UseAuth";
+import Products from "./Products/Products";
 
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
             </div>
         </div>
         </div>
+        <Products/>
         </div>
     );
 };
