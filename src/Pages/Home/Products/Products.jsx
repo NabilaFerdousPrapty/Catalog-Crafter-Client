@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UseAxiosCommon from "../../../hooks/UseAxiosCommon";
 import useAxiosSecure from "../../../hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
@@ -6,30 +6,18 @@ import ProductCard from "./ProductCard/ProductCard";
 import { HashLoader } from "react-spinners";
 import Pagination from "./ProductCard/Pagination";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Products = ({ totalCount }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(6); 
+  const [search, setSearch] = useState("");
   const axiosCommon = UseAxiosCommon();
-  const axiosSecure=useAxiosSecure();
-  const {
-    register,
-    handleSubmit,
- 
-    formState: { errors },
-  } = useForm();
-const [search,setSearch]=useState("");
-const onSubmit = (data) =>{
-  const {search} = data;
- setSearch(search);
- refetch();
- 
-  
-  
-  
-}
-  const { data: products = [], isLoading,refetch } = useQuery({
-    queryKey: ["products", currentPage],
+  const axiosSecure = useAxiosSecure();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const { data: products = [], isLoading, refetch } = useQuery({
+    queryKey: ["products", currentPage, search],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
         `/products?page=${currentPage}&limit=${productsPerPage}&search=${search}`
@@ -40,12 +28,22 @@ const onSubmit = (data) =>{
   });
 
   const totalPages = Math.ceil(totalCount.count / productsPerPage); 
-  // console.log(products);
-  // console.log(totalCount.count);
-  // console.log(productsPerPage);
-  
-  // console.log(totalPages);
-  
+
+  const onSubmit = (data) => {
+    const { search } = data;
+    setSearch(search);
+    Swal.fire({
+      icon: "info",
+      title: "Please wait",
+      text: `You searched for ${search}`,
+      showConfirmButton: false,
+      timer: 2000,
+    });
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [search]);
 
   if (isLoading) {
     return (
@@ -57,11 +55,7 @@ const onSubmit = (data) =>{
   
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
-        setCurrentPage(newPage);
-        console.log(newPage);
-        // console.log(setCurrentPage);
-        
-        
+      setCurrentPage(newPage);
     }
   };
 
@@ -87,7 +81,7 @@ const onSubmit = (data) =>{
                         </p>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col mt-6 space-y-3 lg:space-y-0 lg:flex-row">
-                        <input id="text" type="text"
+                        <input  id="text" type="text"
                         {
                           ...register("search", { required: true })
                         }
@@ -103,6 +97,13 @@ const onSubmit = (data) =>{
                     
                 </div>
         <div className="grid lg:gap-4 gap-2 mt-4 sm:grid-cols-1 lg:grid-cols-3 md:grid-cols-2">
+          {
+            isLoading && (
+              <div className="flex justify-center items-center h-screen">
+                <HashLoader />
+              </div>
+            )
+          }
           {!isLoading &&
             products.map((product) => (
               <ProductCard productItem={product} key={product._id} />
