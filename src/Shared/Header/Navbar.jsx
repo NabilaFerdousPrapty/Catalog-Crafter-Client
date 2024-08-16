@@ -3,6 +3,8 @@ import { CiLogin } from 'react-icons/ci';
 import logo from '../../assets/catalogLogo.png'
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/UseAuth';
+import { Link as Linking, Button, Element, Events, animateScroll as scroll, scrollSpy } from 'react-scroll';
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
  const {
@@ -50,12 +52,16 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <Link
-              className="my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0 border-b-2 border-transparent hover:border-blue-500 dark:hover:border-blue-400"
-              to={'/shop'}
+            <Linking
+            spy={true} 
+            smooth={true} 
+            offset={50} 
+            duration={500} 
+              className="my-2  transition-colors duration-300 transform  hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0 border-b-2 border-transparent hover:border-blue-500 dark:h over:border-blue-400"
+              to={'shop'}
             >
               Shop
-            </Link>
+            </Linking>
            
           </div>
 

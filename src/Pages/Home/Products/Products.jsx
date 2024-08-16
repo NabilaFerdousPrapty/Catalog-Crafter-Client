@@ -67,7 +67,7 @@ const onSubmit = (data) =>{
 
   return (
     <div>
-      <div className="container px-6 py-16 mx-auto">
+      <div id="shop" className="container px-6 py-16 mx-auto">
       <h1 className="text-3xl font-semibold text-gray-800  lg:text-4xl text-center py-3">
         Welcome to <span className="text-blue-500">Electronics</span> Store
       </h1>
