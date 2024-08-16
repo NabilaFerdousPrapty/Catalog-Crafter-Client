@@ -1,3 +1,4 @@
+import { useLoaderData } from "react-router-dom";
 import useAuth from "../../hooks/UseAuth";
 import Products from "./Products/Products";
 
@@ -5,7 +6,7 @@ import Products from "./Products/Products";
 const Home = () => {
     const {user}=useAuth();
     console.log(user);
-    
+    const totalCount=useLoaderData();
     return (
         <div>
            <div className="container px-6 py-16 mx-auto">
@@ -27,7 +28,7 @@ const Home = () => {
             </div>
         </div>
         </div>
-        <Products/>
+        <Products totalCount={totalCount}/>
         </div>
     );
 };

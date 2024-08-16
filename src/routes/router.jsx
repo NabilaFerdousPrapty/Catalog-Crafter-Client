@@ -9,17 +9,30 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./Private/PrivateRoute";
 import Error from "../Pages/Error/Error";
+import UseAxiosCommon from "../hooks/UseAxiosCommon";
+const axiosCommon=UseAxiosCommon();
   const router = createBrowserRouter([
     {
       path: "/",
       element: <PrivateRoute>
         <Main/>
       </PrivateRoute>,
+
  errorElement:<Error/>,
       children:[
         {
             path: "/",
             element:<Home/>,
+            loader: async () => {
+              try {
+                  const response = await axiosCommon.get("/productsCount");
+                  return response.data;
+              } catch (error) {
+                  console.error("Error loading product count:", error);
+                  throw new Error("Failed to load product count");
+              }
+          }
+          
 
         }
       ]
