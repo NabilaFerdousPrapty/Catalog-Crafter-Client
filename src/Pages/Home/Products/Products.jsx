@@ -13,44 +13,65 @@ const Products = ({ totalCount }) => {
   const [productsPerPage] = useState(6);
   const [search, setSearch] = useState("");
   const axiosSecure = useAxiosSecure();
+  const [filters, setFilters] = useState({
+    brand: "",
+    category: "",
+    priceRange: "",
+  });
+  // Separate useForm for search
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
+    register: registerSearch,
+    handleSubmit: handleSubmitSearch,
+    formState: { errors: searchErrors },
   } = useForm();
 
+  // Separate useForm for filter
+  const {
+    register: registerFilter,
+    handleSubmit: handleSubmitFilter,
+  } = useForm();
+
+  const onFilterSubmit = (data) => {
+    setFilters(data);
+    
+ ;
+    
+};
+
+const onSearchSubmit = (data) => {
+    setSearch(data.search);
+    Swal.fire({
+      icon: "info",
+      title: "Please wait",
+      text: `You searched for ${data.search}`,
+      showConfirmButton: false,
+      timer: 1000,
+    });
+};
+
+
+
+// console.log(filters)
   const {
     data: products = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["products", currentPage, search],
+    queryKey: ["products", currentPage, search,filters],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
-        `/products?page=${currentPage}&limit=${productsPerPage}&search=${search}`
+        `/products?page=${currentPage}&limit=${productsPerPage}&search=${search}&brand=${filters.brand}&category=${filters.category}&priceRange=${filters.priceRange}`
       );
       return data;
     },
     keepPreviousData: true,
   });
-
-  const totalPages = Math.ceil(totalCount.count / productsPerPage);
-
-  const onSubmit = (data) => {
-    const { search } = data;
-    setSearch(search);
-    Swal.fire({
-      icon: "info",
-      title: "Please wait",
-      text: `You searched for ${search}`,
-      showConfirmButton: false,
-      timer: 100,
-    });
-  };
-
   useEffect(() => {
     refetch();
-  }, [search]);
+  }, [search, filters, currentPage]);
+  const totalPages = Math.ceil(totalCount.count / productsPerPage);
+
+  
 
   if (isLoading) {
     return (
@@ -85,13 +106,14 @@ const Products = ({ totalCount }) => {
           </p>
 
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmitSearch(onSearchSubmit)}
             className="flex flex-col mt-6 space-y-3 lg:space-y-0 lg:flex-row"
           >
             <input
+            
               id="text"
               type="text"
-              {...register("search", { required: true })}
+              {...registerSearch("search", { required: true })}
               className="px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
               placeholder="Product name"
             />
@@ -103,46 +125,57 @@ const Products = ({ totalCount }) => {
               Search
             </button>
           </form>
-          {errors.search && (
+          {searchErrors.search && (
             <p className="text-red-500">This field is required</p>
           )}
         </div>
         <div>
-          <div className="md:flex justify-between items-center gap-5 border-4 border-teal-500 rounded-md max-w-5xl mx-auto py-8 px-1 my-2">
+          <form onSubmit={handleSubmitFilter(onFilterSubmit)} className="md:flex justify-between items-center gap-5 border-4 border-teal-500 rounded-md max-w-5xl mx-auto py-8 px-1 my-2">
             <input
               type="text"
               name="brand"
+              {
+                ...registerFilter("brand")
+              }
               id="brand"
               placeholder="Brand Name"
               className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600  dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
             />
             <input
               type="text"
+              {
+                ...registerFilter("category")
+              }
               name="category"
               id="category"
               placeholder="Category Name"
               className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600  dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
             />
-            <select className="select select-success w-full max-w-xs">
-              <option disabled selected>
+            <select
+             {...registerFilter("priceRange")}
+             className="select select-success w-full max-w-xs">
+              
+              <option value="" disabled selected >
                 Pick your price range
               </option>
-              <option>৳ 500 - ৳ 1000</option>
-              <option>৳ 1000 - ৳ 2000</option>
-              <option>৳ 2000 - ৳ 4000</option>
-              <option>৳ 4000 - ৳ 8000</option>
-              <option>৳ 8000 - ৳ 16000</option>
-              <option>৳ 16000 - ৳ 32000</option>
-              <option>৳ 32000 - ৳ 64000</option>
-              <option>৳ 64000 - ৳ 128000</option>
+              <option value="500-1000">৳ 500 - ৳ 1000</option>
+              <option value="1000-2000">৳ 1000 - ৳ 2000</option>
+              <option value="2000-4000">৳ 2000 - ৳ 4000</option>
+              <option value="4000-8000">৳ 4000 - ৳ 8000</option>
+              <option value="8000-16000">৳ 8000 - ৳ 16000</option>
+              <option value="16000-32000">৳ 16000 - ৳ 32000</option>
+              <option value="32000-64000">৳ 32000 - ৳ 64000</option>
+              <option value="64000-128000" >৳ 64000 - ৳ 128000</option>
             </select>
+           
+            
             <button
               type="submit"
               className="w-3/4 px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
             >
               Filter
             </button>
-          </div>
+          </form>
           <h1 className="text-3xl font-semibold text-gray-800  lg:text-4xl text-center py-3">
             Sort by <span className="text-blue-500">Price and date</span>
           </h1>
