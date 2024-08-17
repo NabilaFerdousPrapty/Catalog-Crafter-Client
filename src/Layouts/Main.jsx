@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 const Main = () => {
     return (
         <div className=''>
-            <div className='max-w-7xl mx-auto px-2 rounded'>
+            <div className='max-w-7xl mx-auto lg:px-2 rounded'>
              <Navbar/>
              <Outlet/>
             </div>

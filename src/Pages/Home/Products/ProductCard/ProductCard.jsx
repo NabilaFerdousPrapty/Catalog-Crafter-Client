@@ -27,19 +27,20 @@ const ProductCard = ({ productItem }) => {
         </div>
         <div className="md:flex-row flex-col items-center justify-between px-4 py-2 bg-gray-900">
           <h1 className="text-sm font-semibold text-white">
-            <span className="font-mono px-2 text-amber-500">Category:</span>
+            <span className="font-mono md:px-2 text-amber-500">Category:</span>
             {category}
           </h1>
           <h1 className="text-sm font-semibold text-white">
-            <span className="font-mono px-2 text-amber-500">Brand:</span>
+            <span className="font-mono md:px-2 text-amber-500">Brand:</span>
             {brand}
           </h1>
         </div>
         <div className="md:flex-row flex-col items-center justify-between px-4 py-2 bg-gray-900">
           <h1 className="text-sm font-semibold text-white">
-            <span className="font-mono px-2 text-amber-500">Listed at:</span>
+            <span className="font-mono md:px-2 text-amber-500">Listed at:</span>
             {createdAtDate}
-            <span className="font-mono md:px-2 text-amber-500">on</span> 
+            <br />
+            <span className="font-mono md:px-2 text-amber-500">Listed on:</span> 
              {localTime} 
           </h1>
         </div>
@@ -49,15 +50,15 @@ const ProductCard = ({ productItem }) => {
           alt={name}
         />
   
-        <div className="flex items-center justify-between px-4 py-2 bg-gray-900">
-          <h1 className="text-lg font-bold text-white">
+        <div className="flex items-center justify-between lg:px-4 md:px-2 px-1 py-2 bg-gray-900">
+         
+          <h1 className="text-lg font-bold text-white">৳{price}</h1>
+          <h1 className="text-lg font-bold text-white border border-blue-50 rounded-lg ">
             <span className="text-sm">⭐</span>
             {ratings}
           </h1>
-          <h1 className="text-lg font-bold text-white">৳{price}</h1>
-  
-          <br />
-          <button className="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-amber-300 rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none mx-2">
+          
+          <button className="lg:px-2 px-1 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-amber-300 rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none mx-2">
             Add to cart
           </button>
   

@@ -93,7 +93,7 @@ console.log(filters);
 
   return (
     <div>
-      <div id="shop" className="container px-6 py-16 mx-auto">
+      <div id="shop" className="container lg:px-6 px-1 py-16 mx-auto">
         <h1 className="text-3xl font-semibold text-gray-800  lg:text-4xl text-center py-3">
           Welcome to <span className="text-blue-500">Electronics</span> Store
         </h1>
@@ -112,7 +112,7 @@ console.log(filters);
 
           <form
             onSubmit={handleSubmitSearch(onSearchSubmit)}
-            className="flex flex-col mt-6 space-y-3 lg:space-y-0 lg:flex-row"
+            className="flex flex-col  mt-6 space-y-3 lg:space-y-0 lg:flex-row justify-between items-center"
           >
             <input
               id="text"
@@ -133,12 +133,11 @@ console.log(filters);
             <p className="text-red-500">This field is required</p>
           )}
         </div>
-        <div className="border-4 border-teal-500 rounded-md">
+        <div className="border-4 border-teal-500 rounded-md my-3 ">
           <h1 className="text-3xl font-semibold text-gray-800  lg:text-4xl text-center py-3">
             Filter by <span className="text-blue-500">Brand, Category and Price</span>
           </h1>
-          <form onSubmit={handleSubmitFilter(onFilterSubmit)} className="grid md:grid-cols-3
-          grid-cols-1  justify-between items-center gap-5  max-w-5xl mx-auto py-8 px-1 my-2">
+          <form onSubmit={handleSubmitFilter(onFilterSubmit)} className=" lg:flex-row flex-col mt-6 space-y-3 lg:space-y-0 ">
             <input
               type="text"
               name="brand"
@@ -153,11 +152,11 @@ console.log(filters);
               name="category"
               id="category"
               placeholder="Category Name"
-              className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600  dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+              className="block w-full  px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600  dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
             />
             <select
              {...registerFilter("priceRange")}
-             className="select select-success w-full max-w-xs">
+             className="select select-success w-full  max-w-7xl">
               
               <option value="" disabled selected >
                 Pick your price range
@@ -172,14 +171,14 @@ console.log(filters);
               <option value="64000-128000" >৳ 64000 - ৳ 128000</option>
             </select>
            
-          <div className="col-span-3">
+          <div className="">
           <h1 className="text-3xl  font-semibold text-gray-800  lg:text-4xl text-center py-3">
             Sort by <span className="text-blue-500">Price and Date</span>
           </h1>
-          <div className=" md:flex justify-between items-center max-w-md mx-auto border border-teal-500 rounded-box my-5 px-3">
+          <div className=" flex justify-between items-center max-w-xs mx-auto border border-teal-500 rounded-box my-5 px-3">
           <select
              {...registerFilter("priceSort")}
-             className="select select-bordered bg-slate-900 text-white w-1/4 max-w-xs">
+             className="select select-bordered bg-slate-900 text-white lg:w-1/4  md:w-1/2 w-[40%] max-w-xs">
               
               <option value="" disabled selected >
                Price
@@ -192,7 +191,7 @@ console.log(filters);
             </select>
           <select
              {...registerFilter("dateSort")}
-             className="select select-bordered bg-slate-900 text-white w-1/4 max-w-xs">
+             className="select select-bordered bg-slate-900 text-white lg:w-1/4 md:w-1/2 w-[40%] max-w-xs">
               
               <option value="" disabled selected >
                Date
@@ -205,7 +204,7 @@ console.log(filters);
           </div>
             <button
               type="submit"
-              className="w-full col-span-3 px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+              className=" w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
             >
               Filter
             </button>
@@ -213,7 +212,7 @@ console.log(filters);
         
         </div>
         
-        <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 lg:gap-8 gap-4 gap-1 mt-8 md:grid-cols-2 xl:grid-cols-3">
           {products.length > 0 ? (
             products.map((product) => (
               <ProductCard key={product._id} productItem={product} />
@@ -225,7 +224,7 @@ console.log(filters);
           )}
         </div>
       </div>
-      <div className="py-10 flex justify-center">
+      <div className="lg:py-10 py-6 flex justify-center">
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
