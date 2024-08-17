@@ -1,20 +1,27 @@
 import React from 'react';
-
+import logo from '../../assets/catalogLogo.png'
+import { Link } from 'react-router-dom';
+import { Link as Linking } from 'react-scroll';
 const Footer = () => {
   return (
     <footer className="rounded border-2 border-[#112A46] mx-1 ">
       <div className="container px-6 py-8 mx-auto">
         <div className="flex flex-col items-center text-center">
           <a href="#">
-            <img className="w-auto h-7" src="https://merakiui.com/images/full-logo.svg" alt="Logo" />
+            <img className="w-auto h-20" src={logo} alt="Logo" />
           </a>
 
-          <p className="max-w-md mx-auto mt-4 text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          <p className="max-w-5xl mx-auto mt-4 text-gray-500 dark:text-gray-400">
+            The Catalog Crafter is a platform that allows you to create and manage your product catalog with ease. It is a simple and intuitive tool that helps you organize your products and present them in a professional way. With The Catalog Crafter, you can create beautiful catalogs that showcase your products and attract customers. Get started today and take your business to the next level!
           </p>
 
           <div className="flex flex-col mt-4 sm:flex-row sm:items-center sm:justify-center">
-            <button className="flex items-center justify-center order-1 w-full px-2 py-2 mt-3 text-sm tracking-wide text-gray-600 capitalize transition-colors duration-300 transform border rounded-md sm:mx-2 dark:border-gray-400 dark:text-gray-300 sm:mt-0 sm:w-auto hover:bg-gray-50 focus:outline-none focus:ring dark:hover:bg-gray-800 focus:ring-gray-300 focus:ring-opacity-40">
+            <Linking
+            spy={true} 
+            smooth={true} 
+            offset={50} 
+            duration={500} 
+             to='shop' className="flex items-center justify-center order-1 w-full px-2 py-2 mt-3 text-sm tracking-wide text-gray-600 capitalize transition-colors duration-300 transform border rounded-md sm:mx-2 dark:border-gray-400 dark:text-gray-300 sm:mt-0 sm:w-auto hover:bg-gray-50 focus:outline-none focus:ring dark:hover:bg-gray-800 focus:ring-gray-300 focus:ring-opacity-40">
               <svg className="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C21.9939 17.5203 17.5203 21.9939 12 22ZM4 12.172C4.04732 16.5732 7.64111 20.1095 12.0425 20.086C16.444 20.0622 19.9995 16.4875 19.9995 12.086C19.9995 7.68451 16.444 4.10977 12.0425 4.086C7.64111 4.06246 4.04732 7.59876 4 12V12.172ZM10 16.5V7.5L16 12L10 16.5Z"
@@ -22,19 +29,19 @@ const Footer = () => {
                 ></path>
               </svg>
 
-              <span className="mx-1">View Demo</span>
-            </button>
+              <span className="mx-1">View Products</span>
+            </Linking>
 
-            <button className="w-full px-5 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md sm:mx-2 sm:order-2 sm:w-auto hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+            <Link to={'/'} className="w-full px-5 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md sm:mx-2 sm:order-2 sm:w-auto hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
               Get started
-            </button>
+            </Link>
           </div>
         </div>
 
         <hr className="my-10 border-gray-200 dark:border-gray-700" />
 
         <div className="flex flex-col items-center sm:flex-row sm:justify-between">
-          <p className="text-sm text-gray-500">© Copyright 2021. All Rights Reserved.</p>
+          <p className="text-sm text-gray-500">© Copyright 2024. All Rights Reserved.</p>
 
           <div className="flex mt-3 -mx-2 sm:mt-0">
             <a
