@@ -16,7 +16,7 @@ const ProductCard = ({ productItem }) => {
     const localTime = new Date(dateTimeString).toLocaleTimeString(); // Convert to local time
   
     return (
-      <div className="max-w-md overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 ">
+      <div  className="max-w-md overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 ">
         <div className="px-4 py-2 ">
           <h1 className="text-xl font-bold text-gray-800 uppercase dark:text-white">
             {name}

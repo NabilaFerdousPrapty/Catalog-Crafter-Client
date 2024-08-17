@@ -93,7 +93,7 @@ console.log(filters);
 
   return (
     <div>
-      <div id="shop" className="container lg:px-6 px-1 py-16 mx-auto">
+      <div  className="container lg:px-6 px-1 py-16 mx-auto">
         <h1 className="text-3xl font-semibold text-gray-800  lg:text-4xl text-center py-3">
           Welcome to <span className="text-blue-500">Electronics</span> Store
         </h1>
@@ -212,7 +212,7 @@ console.log(filters);
         
         </div>
         
-        <div className="grid grid-cols-1 lg:gap-8 gap-4 gap-1 mt-8 md:grid-cols-2 xl:grid-cols-3">
+        <div id="shop" className="grid grid-cols-1 lg:gap-8 gap-4 gap-1 mt-8 md:grid-cols-2 xl:grid-cols-3">
           {products.length > 0 ? (
             products.map((product) => (
               <ProductCard key={product._id} productItem={product} />
