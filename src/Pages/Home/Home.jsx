@@ -6,7 +6,7 @@ import { Link } from "react-scroll";
 
 const Home = () => {
     const {user}=useAuth();
-    console.log(user);
+    // console.log(user);
     const totalCount=useLoaderData();
     return (
         <div>

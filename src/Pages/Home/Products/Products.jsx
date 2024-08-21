@@ -81,7 +81,7 @@ const Products = ({ totalCount }) => {
       setCurrentPage(newPage);
     }
   };
-console.log(filters);
+// console.log(filters);
 
   if (isLoading) {
     return (

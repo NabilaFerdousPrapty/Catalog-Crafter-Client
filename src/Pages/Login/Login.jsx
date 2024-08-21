@@ -39,7 +39,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500
         })
-        console.log(error.message);
+        // console.log(error.message);
       });
   }
   const handleGoogleLogin = () => {
@@ -67,7 +67,7 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500
       })
-        console.log(error.message);
+        // console.log(error.message);
     });
 };
     return (

@@ -89,7 +89,7 @@ const SignUp = () => {
             showConfirmButton: false,
             timer: 1500
           })
-            console.log(error.message);
+            // console.log(error.message);
         });
     };
 

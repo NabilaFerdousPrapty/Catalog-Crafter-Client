@@ -28,7 +28,7 @@ const axiosCommon=UseAxiosCommon();
                   const response = await axiosCommon.get("/productsCount");
                   return response.data;
               } catch (error) {
-                  console.error("Error loading product count:", error);
+                  // console.error("Error loading product count:", error);
                   throw new Error("Failed to load product count");
               }
           }
