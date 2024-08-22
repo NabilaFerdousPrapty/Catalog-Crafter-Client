@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
+
 const ProductCard = ({ productItem }) => {
     const {
+      _id,
       name,
       brand,
       image,
@@ -61,10 +64,11 @@ const ProductCard = ({ productItem }) => {
           <button className="lg:px-2 px-1 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-amber-300 rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none mx-2">
             Add to cart
           </button>
-  
-          <button className="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-teal-100 rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">
-            View Details
-          </button>
+          <Link to={`/product/${_id}`}>
+                     <button className="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-teal-100 rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">
+            View details
+                     </button>
+          </Link>
         </div>
        
       </div>

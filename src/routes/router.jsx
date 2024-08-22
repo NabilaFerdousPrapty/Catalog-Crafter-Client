@@ -10,6 +10,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./Private/PrivateRoute";
 import Error from "../Pages/Error/Error";
 import UseAxiosCommon from "../hooks/UseAxiosCommon";
+import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 const axiosCommon=UseAxiosCommon();
   const router = createBrowserRouter([
     {
@@ -34,6 +35,9 @@ const axiosCommon=UseAxiosCommon();
           }
           
 
+        },{
+          path: "/product/:id",
+          element:<ProductDetails/>,
         }
       ]
     },
