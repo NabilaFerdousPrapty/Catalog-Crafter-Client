@@ -37,6 +37,7 @@ const axiosCommon=UseAxiosCommon();
 
         },{
           path: "/product/:id",
+          
           element:<ProductDetails/>,
         }
       ]
